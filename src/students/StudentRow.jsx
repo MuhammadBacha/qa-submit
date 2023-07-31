@@ -9,7 +9,16 @@ function StudentRow({ student, numberOfPages, index }) {
   const [searchParams] = useSearchParams();
   const page = +searchParams.get("page") || 0;
 
-  const { id, name, desiredField, test, netMarks, aggregate, stream } = student;
+  const {
+    id,
+    name,
+    desiredField,
+    test,
+    netMarks,
+    meritNumber,
+    aggregate,
+    stream,
+  } = student;
 
   const { isLoading, mutate } = useDeleteStudent(numberOfPages);
   const num = page === 0 ? index + 1 : index + 1 + STUDENTS_PER_PAGE * page;
@@ -21,6 +30,7 @@ function StudentRow({ student, numberOfPages, index }) {
       <td className="sm:p-1 md:p-2">{test}</td>
       <td className="sm:p-1 md:p-2">{netMarks}</td>
       <td className="sm:p-1 md:p-2">{aggregate}</td>
+      <td className="sm:p-1 md:p-2">{meritNumber}</td>
       <td className="sm:p-1 md:p-2">{desiredField}</td>
       <td className="sm:p-1 md:p-2">
         {isLoading ? (

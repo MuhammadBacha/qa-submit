@@ -10,9 +10,14 @@ export const inputsArray = [
     label: "Test",
     fieldName: "test",
     type: "select",
-    options: ["Engineering", "ICS", "Business"],
+    options: [
+      "Engineering",
+      "ICS",
+      "Business",
+      "Biotechnology",
+      "Data Science",
+    ],
   },
-  { label: "Roll Number", fieldName: "rollNumber" },
   {
     label: "NET Marks",
     fieldName: "netMarks",
@@ -25,9 +30,14 @@ export const inputsArray = [
     label: "Aggregate",
     fieldName: "aggregate",
     extraValidation: {
-      validate: (val) => +val <= 100 || "Aggregate must be less than 100.",
+      validate: (val) => {
+        if (+val > 100) return "Aggregate must be less than 100.";
+        if (!Number(val)) return "Aggregate must be a number";
+        return true;
+      },
     },
   },
+  { label: "Merit Number", type: "number", fieldName: "meritNumber" },
   {
     label: "Desired Field",
     fieldName: "desiredField",
@@ -36,7 +46,7 @@ export const inputsArray = [
   },
 ];
 
-export const widthsArray = [0.5, 13, 5, 5, 1, 5, 0, 1];
+export const widthsArray = [0.5, 13, 5, 5, 1, 5, 1, 1, 1];
 
 export const headers = [
   "#",
@@ -45,6 +55,7 @@ export const headers = [
   "Test",
   "Marks",
   "Aggregate",
+  "Merit Number",
   "Field",
   "",
 ];
