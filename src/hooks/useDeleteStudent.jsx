@@ -24,24 +24,9 @@ function useDeleteStudent(numberOfPages) {
   const { isLoading, mutate } = useMutation({
     mutationFn: (id) => deleteStudent(id),
     onSuccess: () => {
-      queryClient.invalidateQueries(["students", page, filters, sort]);
+      // Invalidate every student query
+      queryClient.invalidateQueries(["students"]);
       toast.success("Student deleted successfully!");
-      if (page < numberOfPages - 1) {
-        for (let i = page; i < numberOfPages; i++) {
-          // Invalidate remaining pages
-          queryClient.invalidateQueries(["students", i + 1, filters, sort]);
-        }
-      }
-      // In previous pages, change the totalStudents number only
-      queryClient.setQueryData(
-        ["students", page - 1, filters, sort],
-        (prevData) => {
-          return {
-            ...prevData,
-            totalStudents: prevData.totalStudents - 1,
-          };
-        }
-      );
     },
   });
   return { isLoading, mutate };
