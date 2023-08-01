@@ -7,11 +7,11 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-src/supabase.js
 node_modules
 dist
 dist-ssr
 *.local
+/src/supabase.js
 
 # Editor directories and files
 .vscode/*
